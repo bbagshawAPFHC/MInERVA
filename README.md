@@ -1,8 +1,5 @@
 # Athena ePHI App v2
- 
-Sure, I will generate the `README.md` for your project with inspiration from the provided link, aiming for a clean and professional format.
 
-```markdown
 # Patient Data Management System
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -23,7 +20,6 @@ The Patient Data Management System is a web application designed to provide secu
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
 
 ## Features
 
@@ -46,7 +42,6 @@ The Patient Data Management System is a web application designed to provide secu
 - **Jest:** A testing framework for unit and component tests.
 
 ## Project Structure
-
 ```
 /my-app
 |-- /public
@@ -119,7 +114,7 @@ The Patient Data Management System is a web application designed to provide secu
 |-- .env
 |-- tsconfig.json
 |-- package.json
-``
+```
 
 ## Installation
 
@@ -219,10 +214,3 @@ We welcome contributions! Please fork the repository and submit a pull request f
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or issues, please open an issue on GitHub or contact [your-email@example.com].
-```
-
-Feel free to customize the repository URL, contact information, and any other details as per your requirements.

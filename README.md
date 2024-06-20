@@ -1,4 +1,4 @@
-# Patient Data Management System
+# MInERVA (Medical Information and Electronic Record Vault Application)
 
 ![License](https://img.shields.io/badge/license-GNU%20GPL-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D12.0.0-green.svg)
@@ -6,7 +6,7 @@
 
 ## Overview
 
-The Patient Data Management System is a web application designed to provide secure access to patient data stored in newline delimited JSON (NDJSON) files. The primary goal is to facilitate the secure retrieval, viewing, and exporting of patient records, ensuring compliance with data privacy regulations and enhancing data accessibility for authorized users.
+MInERVA is a web application designed to provide secure access to patient data stored in newline delimited JSON (NDJSON) files. The primary goal is to facilitate the secure retrieval, viewing, and exporting of patient records, ensuring compliance with data privacy regulations and enhancing data accessibility for authorized users.
 
 ## Table of Contents
 

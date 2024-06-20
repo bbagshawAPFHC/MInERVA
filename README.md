@@ -1,8 +1,6 @@
-# Athena ePHI App v2
-
 # Patient Data Management System
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-GNU%20GPL-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D12.0.0-green.svg)
 ![React](https://img.shields.io/badge/react-%3E%3D17.0.0-blue.svg)
 
@@ -20,6 +18,7 @@ The Patient Data Management System is a web application designed to provide secu
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
+- [Contact](#contact)
 
 ## Features
 
@@ -42,8 +41,9 @@ The Patient Data Management System is a web application designed to provide secu
 - **Jest:** A testing framework for unit and component tests.
 
 ## Project Structure
+
 ```
-/my-app
+/frontend
 |-- /public
 |   |-- index.html
 |   |-- favicon.ico
@@ -123,7 +123,7 @@ The Patient Data Management System is a web application designed to provide secu
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-repo/patient-data-management.git
-   cd patient-data-management/my-app
+   cd patient-data-management/frontend
    ```
 
 2. **Install dependencies:**
@@ -180,7 +180,7 @@ The Patient Data Management System is a web application designed to provide secu
 ### Frontend
 
 ```bash
-cd my-app
+cd frontend
 npm start
 ```
 
@@ -196,7 +196,7 @@ npm run dev
 ### Frontend
 
 ```bash
-cd my-app
+cd frontend
 npm test
 ```
 
@@ -213,4 +213,8 @@ We welcome contributions! Please fork the repository and submit a pull request f
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License (GPL). See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or issues, please open an issue on GitHub or contact [your-email@example.com].

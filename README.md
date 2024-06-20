@@ -42,7 +42,7 @@ The Patient Data Management System is a web application designed to provide secu
 
 ## Project Structure
 
-```
+```plaintext
 /frontend
 |-- /public
 |   |-- index.html
@@ -50,47 +50,40 @@ The Patient Data Management System is a web application designed to provide secu
 |
 |-- /src
 |   |-- /components
-|   |   |-- AuthWrapper.tsx
-|   |   |-- Dashboard.tsx
-|   |   |-- PatientDetails.tsx
-|   |   |-- PatientList.tsx
-|   |   |-- Profile.tsx
-|   |   |-- /common
-|   |       |-- Header.tsx
-|   |       |-- Footer.tsx
-|   |       |-- Sidebar.tsx
-|
+|   |   |-- /Auth
+|   |   |   |-- AuthWrapper.tsx
+|   |   |-- /Dashboard
+|   |   |   |-- Dashboard.tsx
+|   |   |   |-- /common
+|   |   |       |-- Header.tsx
+|   |   |       |-- Footer.tsx
+|   |   |       |-- Sidebar.tsx
 |   |-- /hooks
 |   |   |-- useAuth.ts
 |   |   |-- useApi.ts
-|
 |   |-- /pages
 |   |   |-- DashboardPage.tsx
 |   |   |-- PatientPage.tsx
 |   |   |-- ProfilePage.tsx
-|
 |   |-- /services
 |   |   |-- api.ts
 |   |   |-- auth.ts
-|
 |   |-- /styles
 |   |   |-- index.css
-|   |   |-- components.css
-|
+|   |   |-- /components
+|   |       |-- AuthWrapper.css
+|   |       |-- Dashboard.css
 |   |-- /tests
 |   |   |-- App.test.tsx
 |   |   |-- /components
 |   |       |-- AuthWrapper.test.tsx
 |   |       |-- Dashboard.test.tsx
-|
 |   |-- /utils
 |   |   |-- formatDate.ts
 |   |   |-- calculateAge.ts
-|
 |   |-- /context
 |   |   |-- AuthContext.tsx
 |   |   |-- PatientContext.tsx
-|
 |   |-- App.tsx
 |   |-- authConfig.ts
 |   |-- index.tsx
@@ -99,18 +92,25 @@ The Patient Data Management System is a web application designed to provide secu
 |
 /backend
 |-- /src
-|   |-- /middleware
-|   |   |-- errorHandler.ts
-|   |   |-- authMiddleware.ts
-|   |
+|   |-- /controllers
+|   |   |-- patientController.ts
+|   |   |-- authController.ts
+|   |-- /models
+|   |   |-- patientModel.ts
+|   |   |-- userModel.ts
+|   |-- /services
+|   |   |-- patientService.ts
+|   |   |-- authService.ts
 |   |-- /routes
 |   |   |-- patientRoutes.ts
 |   |   |-- authRoutes.ts
-|   |
+|   |-- /middleware
+|   |   |-- errorHandler.ts
+|   |   |-- authMiddleware.ts
 |   |-- index.ts
-|   |-- models.ts
-|   |-- controllers.ts
-|
+|-- /config
+|   |-- database.ts
+|   |-- server.ts
 |-- .env
 |-- tsconfig.json
 |-- package.json
@@ -121,17 +121,20 @@ The Patient Data Management System is a web application designed to provide secu
 ### Frontend
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/your-repo/patient-data-management.git
    cd patient-data-management/frontend
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set up Tailwind CSS:**
+
    ```bash
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
@@ -142,21 +145,25 @@ The Patient Data Management System is a web application designed to provide secu
 ### Backend
 
 1. **Navigate to the backend directory:**
+
    ```bash
    cd ../backend
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set up TypeScript:**
+
    ```bash
    npm install -D typescript @types/node @types/express ts-node
    ```
 
 4. **Create `tsconfig.json`** with the following content:
+
    ```json
    {
      "compilerOptions": {
@@ -171,20 +178,21 @@ The Patient Data Management System is a web application designed to provide secu
    ```
 
 5. **Create a `.env` file** with your MongoDB connection string:
-   ```
+
+   ```.env
    MONGO_URI=your_mongo_connection_string
    ```
 
 ## Usage
 
-### Frontend
+### Frontend Usage
 
 ```bash
 cd frontend
 npm start
 ```
 
-### Backend
+### Backend Usage
 
 ```bash
 cd backend
@@ -193,14 +201,14 @@ npm run dev
 
 ## Testing
 
-### Frontend
+### Frontend Testing
 
 ```bash
 cd frontend
 npm test
 ```
 
-### Backend
+### Backend Testing
 
 ```bash
 cd backend
@@ -217,4 +225,4 @@ This project is licensed under the GNU General Public License (GPL). See the [LI
 
 ## Contact
 
-For any questions or issues, please open an issue on GitHub or contact [your-email@example.com].
+For any questions or concerns, please request good vibes on facebook or something, idk.

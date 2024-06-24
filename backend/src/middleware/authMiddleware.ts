@@ -31,6 +31,8 @@ export const azureAdMiddleware = async (req: Request, res: Response, next: NextF
   
     if (response) {
       req.user = response.account as CustomAccountInfo | undefined;
+      console.log('User:', req.user);
+      console.log('Token:', response.accessToken);
       next();
     } else {
       return res.status(401).json({ message: 'Unauthorized' });

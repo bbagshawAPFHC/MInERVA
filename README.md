@@ -42,78 +42,98 @@ MInERVA is a web application designed to provide secure access to patient data s
 
 ## Project Structure
 
+### Frontend
+
 ```plaintext
 /frontend
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- tailwind.config.js
+|-- tsconfig.json
 |-- /public
-|   |-- index.html
 |   |-- favicon.ico
-|
+|   |-- index.html
 |-- /src
-|   |-- /components
-|   |   |-- /Auth
-|   |   |   |-- AuthWrapper.tsx
-|   |   |-- /Dashboard
-|   |   |   |-- Dashboard.tsx
-|   |   |   |-- /common
-|   |   |       |-- Header.tsx
-|   |   |       |-- Footer.tsx
-|   |   |       |-- Sidebar.tsx
-|   |-- /hooks
-|   |   |-- useAuth.ts
-|   |   |-- useApi.ts
-|   |-- /pages
-|   |   |-- DashboardPage.tsx
-|   |   |-- PatientPage.tsx
-|   |   |-- ProfilePage.tsx
-|   |-- /services
-|   |   |-- api.ts
-|   |   |-- auth.ts
-|   |-- /styles
-|   |   |-- index.css
-|   |   |-- /components
-|   |       |-- AuthWrapper.css
-|   |       |-- Dashboard.css
-|   |-- /tests
-|   |   |-- App.test.tsx
-|   |   |-- /components
-|   |       |-- AuthWrapper.test.tsx
-|   |       |-- Dashboard.test.tsx
-|   |-- /utils
-|   |   |-- formatDate.ts
-|   |   |-- calculateAge.ts
-|   |-- /context
-|   |   |-- AuthContext.tsx
-|   |   |-- PatientContext.tsx
-|   |-- App.tsx
-|   |-- authConfig.ts
-|   |-- index.tsx
-|   |-- tailwind.config.js
-|   |-- postcss.config.js
-|
+    |-- App.tsx
+    |-- authConfig.ts
+    |-- index.tsx
+    |-- /components
+    |   |-- /Auth
+    |   |   |-- AuthWrapper.tsx
+    |   |-- /Dashboard
+    |       |-- Dashboard.tsx
+    |       |-- /common
+    |           |-- Footer.tsx
+    |           |-- Header.tsx
+    |           |-- Sidebar.tsx
+    |-- /context
+    |   |-- AuthContext.tsx
+    |   |-- PatientContext.tsx
+    |-- /hooks
+    |   |-- useApi.ts
+    |   |-- useAuth.ts
+    |   |-- usePatientRecords.ts
+    |   |-- usePatients.ts
+    |   |-- usePatientSearch.ts
+    |-- /pages
+    |   |-- DashboardPage.tsx
+    |   |-- LoginPage.tsx
+    |   |-- PatientListPage.tsx
+    |   |-- PatientPage.tsx
+    |   |-- PatientRecordsPage.tsx
+    |   |-- PatientSearchPage.tsx
+    |   |-- ProfilePage.tsx
+    |-- /services
+    |   |-- api.ts
+    |   |-- auth.ts
+    |-- /styles
+    |   |-- index.css
+    |   |-- /components
+    |       |-- AuthWrapper.css
+    |       |-- Dashboard.css
+    |-- /tests
+    |   |-- App.test.tsx
+    |   |-- /components
+    |       |-- AuthWrapper.test.tsx
+    |       |-- Dashboard.test.tsx
+    |-- /utils
+        |-- calculateAge.ts
+        |-- formatDate.ts
+```
+
+### Backend
+
+```plaintext
 /backend
+|-- package-lock.json
+|-- package.json
+|-- tsconfig.json
 |-- /src
+|   |-- index.ts
+|   |-- /config
+|   |   |-- authConfig.ts
+|   |   |-- database.ts
+|   |   |-- server.ts
 |   |-- /controllers
-|   |   |-- patientController.ts
 |   |   |-- authController.ts
+|   |   |-- patientController.ts
+|   |-- /middleware
+|   |   |-- authMiddleware.ts
+|   |   |-- azureAdMiddleware.ts
+|   |   |-- errorHandler.ts
 |   |-- /models
 |   |   |-- patientModel.ts
 |   |   |-- userModel.ts
-|   |-- /services
-|   |   |-- patientService.ts
-|   |   |-- authService.ts
 |   |-- /routes
-|   |   |-- patientRoutes.ts
 |   |   |-- authRoutes.ts
-|   |-- /middleware
-|   |   |-- errorHandler.ts
-|   |   |-- authMiddleware.ts
-|   |-- index.ts
-|-- /config
-|   |-- database.ts
-|   |-- server.ts
-|-- .env
-|-- tsconfig.json
-|-- package.json
+|   |   |-- patientRoutes.ts
+|   |-- /services
+|   |   |-- authService.ts
+|   |   |-- patientService.ts
+|   |-- /types
+|       |-- /express
+|           |-- index.d.ts
 ```
 
 ## Installation

@@ -5,7 +5,8 @@ import { loginRequest } from './authConfig';
 import { BrowserAuthError } from '@azure/msal-browser'; // Add this import
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
-import PatientListPage from './pages/PatientListPage';
+import PatientSearchPage from './pages/PatientSearchPage';
+import PatientRecordsPage from './pages/PatientRecordsPage';
 
 const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -35,7 +36,8 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/patients" element={<PatientListPage />} />
+        <Route path="/patients" element={<PatientSearchPage />} />
+        <Route path="/patients/:athenapatientid" element={<PatientRecordsPage />} />
         <Route path="/" element={<DashboardPage />} />
       </Routes>
     </Router>

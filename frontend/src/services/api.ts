@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001/api',  // Changed to port 3001
+  baseURL: 'http://localhost:3001/api',
 });
 
 export const getPatients = async () => {
@@ -11,5 +11,15 @@ export const getPatients = async () => {
 
 export const getPatient = async (id: string) => {
   const response = await api.get(`/patients/${id}`);
+  return response.data;
+};
+
+export const searchPatients = async (name: string) => {
+  const response = await api.get(`/patients/search`, { params: { name } });
+  return response.data;
+};
+
+export const getPatientRecords = async (athenapatientid: string) => {
+  const response = await api.get(`/patients/records/${athenapatientid}`);
   return response.data;
 };

@@ -1,7 +1,7 @@
 // backend/src/middleware/azureAdMiddleware.ts
 import { Request, Response, NextFunction } from 'express';
 import { ConfidentialClientApplication } from '@azure/msal-node';
-import { azureAdConfig } from '../../config/authConfig';
+import { azureAdConfig } from '../config/authConfig';
 import { CustomAccountInfo } from '../types/express';
 
 const msalConfig = {

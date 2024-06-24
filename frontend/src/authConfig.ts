@@ -1,4 +1,3 @@
-// frontend/src/authConfig.ts
 import { Configuration, LogLevel } from '@azure/msal-browser';
 
 export const msalConfig: Configuration = {

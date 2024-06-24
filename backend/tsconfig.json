@@ -1,12 +1,15 @@
-// backend/tsconfig.json
 {
-    "compilerOptions": {
-      // other options
-      "typeRoots": ["./src/types", "./node_modules/@types"],
-      "target": "es5",
-      "module": "commonjs",
-      "outDir": "dist",
-      "strict": true,
-      "esModuleInterop": true
-    }
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
+  "files":["src/types/express/index.d.ts"]
 }

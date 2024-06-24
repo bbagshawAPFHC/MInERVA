@@ -1,4 +1,4 @@
-// backend/src/types/express/index.d.ts
+// src/types/express/index.d.ts
 import { AccountInfo } from '@azure/msal-common';
 
 interface CustomAccountInfo extends AccountInfo {
@@ -7,8 +7,11 @@ interface CustomAccountInfo extends AccountInfo {
 
 declare global {
   namespace Express {
-    interface Request {
-      user?: CustomAccountInfo;
+    export interface Request {
+        user: any;
+    }
+    export interface Response {
+        user: any;
     }
   }
 }

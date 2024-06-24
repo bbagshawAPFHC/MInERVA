@@ -1,7 +1,7 @@
 // backend/src/middleware/azureAdMiddleware.ts
 import { Request, Response, NextFunction } from 'express';
 import { expressjwt } from 'express-jwt';
-import * as jwksRsa from 'jwks-rsa';
+import jwksRsa from 'jwks-rsa';
 
 export const azureAdMiddleware = expressjwt({
   secret: jwksRsa.expressJwtSecret({

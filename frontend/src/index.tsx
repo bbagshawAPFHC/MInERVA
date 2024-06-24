@@ -1,4 +1,3 @@
-// frontend/src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PublicClientApplication } from '@azure/msal-browser';
@@ -7,6 +6,18 @@ import { msalConfig } from './authConfig';
 import App from './App';
 
 const msalInstance = new PublicClientApplication(msalConfig);
+
+msalInstance.handleRedirectPromise()
+  .then((response) => {
+    if (response) {
+      console.log('Login successful:', response);
+    } else {
+      console.log('No redirect response, user might already be authenticated');
+    }
+  })
+  .catch((error) => {
+    console.error('Error handling redirect:', error);
+  });
 
 ReactDOM.render(
   <MsalProvider instance={msalInstance}>

@@ -1,4 +1,3 @@
-// backend/src/middleware/azureAdMiddleware.ts
 import { Request, Response, NextFunction } from 'express';
 import { expressjwt } from 'express-jwt';
 import jwksRsa from 'jwks-rsa';

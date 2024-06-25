@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-interface patient__id_Buffer {
+interface careteam__id_Buffer {
   0: any;
   1: any;
   2: any;
@@ -16,7 +16,7 @@ interface patient__id_Buffer {
 
 }
 
-const patient__id_BufferSchema: Schema = new Schema({
+const careteam__id_BufferSchema: Schema = new Schema({
   0: { type: Schema.Types.Mixed, required: true },
   1: { type: Schema.Types.Mixed, required: true },
   2: { type: Schema.Types.Mixed, required: true },
@@ -32,30 +32,30 @@ const patient__id_BufferSchema: Schema = new Schema({
 
 });
 
-interface patient__id {
-  buffer: patient__id_Buffer;
+interface careteam__id {
+  buffer: careteam__id_Buffer;
 
 }
 
-const patient__idSchema: Schema = new Schema({
-  buffer: { type: patient__id_BufferSchema, required: true },
+const careteam__idSchema: Schema = new Schema({
+  buffer: { type: careteam__id_BufferSchema, required: true },
 
 });
 
-interface Patient extends Document {
-  _id: patient__id;
-  patients: any;
+interface Careteam extends Document {
+  _id: careteam__id;
+  careteams: any;
   totalcount: any;
 
 }
 
-const PatientModelSchema: Schema = new Schema({
-  _id: { type: patient__idSchema, required: true },
-  patients: { type: Schema.Types.Mixed, required: true },
+const CareteamModelSchema: Schema = new Schema({
+  _id: { type: careteam__idSchema, required: true },
+  careteams: { type: Schema.Types.Mixed, required: true },
   totalcount: { type: Schema.Types.Mixed, required: true },
 
 });
 
-const PatientModel = mongoose.model<Patient>('patient', PatientModelSchema, 'patient');
+const CareteamModel = mongoose.model<Careteam>('careteam', CareteamModelSchema, 'careteam');
 
-export default PatientModel;
+export default CareteamModel;

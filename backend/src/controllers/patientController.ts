@@ -1,38 +1,56 @@
 import { Request, Response } from 'express';
-import Patient from '../models/patientModel'; // Correct import
-
-export const searchPatients = async (req: Request, res: Response) => {
-  const query = req.query.query as string;
-  try {
-    const patients = await Patient.find({
-      $or: [
-        { "patients.name.given": { $regex: query, $options: 'i' } },
-        { "patients.name.family": { $regex: query, $options: 'i' } }
-      ]
-    }).exec();
-
-    if (patients) {
-      const results = patients.map((patient: any) => {
-        console.log('Patient:', JSON.stringify(patient, null, 2)); // Log each patient in detail
-        if (!patient.patients || !patient.patients[0] || !patient.patients[0].name) {
-          console.error('Missing name data in patient:', patient);
-          return null;
-        }
-        return {
-          _id: patient._id,
-          firstName: patient.patients[0].name.given[0],
-          lastName: patient.patients[0].name.family,
-          athenapatientid: patient.athenapatientid
-        };
-      }).filter(patient => patient !== null);
-
-      console.log('Response:', JSON.stringify(results, null, 2)); // Log the final response
-      res.json(results);
-    } else {
-      res.status(404).json({ message: 'No patients found' });
+  import PatientModel from '../models/PatientModel';
+  
+  // Get all patients
+  export const getAllPatient = async (req: Request, res: Response) => {
+    try {
+      const items = await PatientModel.find();
+      res.status(200).json(items);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
-  } catch (error) {
-    console.error('Error in searchPatients:', error);
-    res.status(500).json({ message: 'Error fetching patients' });
-  }
-};
+  };
+  
+  // Get a patient by ID
+  export const getPatientById = async (req: Request, res: Response) => {
+    try {
+      const item = await PatientModel.findById(req.params.id);
+      if (!item) return res.status(404).json({ message: 'Patient not found' });
+      res.status(200).json(item);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+  // Create a new patient
+  export const createPatient = async (req: Request, res: Response) => {
+    const newItem = new PatientModel(req.body);
+    try {
+      const savedItem = await newItem.save();
+      res.status(201).json(savedItem);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+  
+  // Update a patient by ID
+  export const updatePatient = async (req: Request, res: Response) => {
+    try {
+      const updatedItem = await PatientModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updatedItem) return res.status(404).json({ message: 'Patient not found' });
+      res.status(200).json(updatedItem);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+  
+  // Delete a patient by ID
+  export const deletePatient = async (req: Request, res: Response) => {
+    try {
+      const deletedItem = await PatientModel.findByIdAndDelete(req.params.id);
+      if (!deletedItem) return res.status(404).json({ message: 'Patient not found' });
+      res.status(200).json({ message: 'Patient deleted' });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  };

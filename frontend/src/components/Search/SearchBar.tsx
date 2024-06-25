@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
-import { usePatientSearch } from '../../hooks/usePatients';
+import usePatientSearch from '../../hooks/usePatientSearch';
 
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState('');
-  const { patients, error } = usePatientSearch(query);
+  const { patients, error, loading, fetchPatients } = usePatientSearch();
 
-  const handleSearch = () => {
-    setQuery(query);
+  const handleSearch = async (event: React.FormEvent) => {
+    event.preventDefault();
+    fetchPatients(query);
   };
 
   return (
     <div>
-      <input 
-        type="text" 
-        value={query} 
-        onChange={(e) => setQuery(e.target.value)} 
-        placeholder="Search for a patient" 
-      />
-      <button onClick={handleSearch}>Search</button>
-      {error && <div>Error: {error.message}</div>}
-      <ul>
-        {patients.map((patient) => (
-          <li key={patient._id}>{`${patient.firstName} ${patient.lastName} (ID: ${patient.athenapatientid})`}</li>
-        ))}
-      </ul>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search patients by name or ID"
+          className="border p-2 rounded"
+        />
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded ml-2">
+          Search
+        </button>
+      </form>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {loading && <p>Loading...</p>}
+      <div className="search-results mt-4">
+        {patients.length > 0 ? (
+          <ul>
+            {patients.map((patient) => (
+              <li key={patient._id}>{`${patient.name.given} ${patient.name.family} (ID: ${patient.athenapatientid})`}</li>
+            ))}
+          </ul>
+        ) : (
+          !loading && <p>No results found</p>
+        )}
+      </div>
     </div>
   );
 };

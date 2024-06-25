@@ -4,25 +4,18 @@ import { Patient } from '../types/Patient';
 
 const usePatientSearch = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
 
-  const fetchPatients = async (query: string) => {
-    setLoading(true);
+  const search = async (searchTerm: string) => {
     try {
-      const data: Patient[] = await searchPatients(query);
-      console.log('Fetched patients:', data); // Debugging output
+      const data = await searchPatients(searchTerm);
       setPatients(data);
-      setError(null);
-    } catch (err) {
-      console.error('Error in usePatientSearch:', err);
-      setError('Failed to fetch patients');
-    } finally {
-      setLoading(false);
+    } catch (err: any) {
+      setError(err);
     }
   };
 
-  return { patients, error, loading, fetchPatients };
+  return { patients, search, error };
 };
 
 export default usePatientSearch;

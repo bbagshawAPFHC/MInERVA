@@ -54,3 +54,18 @@ import { Request, Response } from 'express';
       res.status(500).json({ message: error.message });
     }
   };
+
+  export const searchDemographic = async (req: Request, res: Response) => {
+    try {
+      const { athenapatientid } = req.query;
+      if (!athenapatientid) {
+        return res.status(400).json({ message: 'athenapatientid query parameter is required' });
+      }
+  
+      const patients = await DemographicModel.find({ 'patientdetails.athenapatientid': athenapatientid });
+      res.status(200).json(patients);
+    } catch (error: any) {
+      console.error('Error searching demographics:', error);
+      res.status(500).json({ message: error.message });
+    }
+  };

@@ -1,42 +1,36 @@
 import React, { useState } from 'react';
-import usePatientSearch from '../../hooks/usePatientSearch';
+import { searchDemographic } from '../../services/api';
+import { Patient } from '../../types/Patient';
 
 const SearchBar: React.FC = () => {
-  const [query, setQuery] = useState('');
-  const { patients, error, loading, fetchPatients } = usePatientSearch();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState<Patient[]>([]);
 
-  const handleSearch = async (event: React.FormEvent) => {
-    event.preventDefault();
-    fetchPatients(query);
+  const handleSearch = async () => {
+    try {
+      const data: Patient[] = await searchDemographic(searchTerm);
+      setResults(data);
+    } catch (error) {
+      console.error('Error fetching search results', error);
+    }
   };
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search patients by name or ID"
-          className="border p-2 rounded"
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded ml-2">
-          Search
-        </button>
-      </form>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {loading && <p>Loading...</p>}
-      <div className="search-results mt-4">
-        {patients.length > 0 ? (
-          <ul>
-            {patients.map((patient) => (
-              <li key={patient._id}>{`${patient.name.given} ${patient.name.family} (ID: ${patient.athenapatientid})`}</li>
-            ))}
-          </ul>
-        ) : (
-          !loading && <p>No results found</p>
-        )}
-      </div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search by athenapatientid"
+      />
+      <button onClick={handleSearch}>Search</button>
+      <ul>
+        {results.map((patient) => (
+          <li key={patient._id}>
+            {`${patient.patientdetails.firstname} ${patient.patientdetails.lastname} (ID: ${patient.patientdetails.athenapatientid})`}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

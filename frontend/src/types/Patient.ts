@@ -1,8 +1,11 @@
+export interface PatientDetails {
+  athenapatientid: string;
+  firstname: string;
+  lastname: string;
+  // add other fields as necessary
+}
+
 export interface Patient {
   _id: string;
-  name: {
-    given: string;
-    family: string;
-  };
-  athenapatientid: string;
+  patientdetails: PatientDetails;
 }

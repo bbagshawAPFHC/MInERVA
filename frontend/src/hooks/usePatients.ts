@@ -3,33 +3,32 @@ import { searchPatients } from '../services/api';
 
 interface Patient {
   _id: string;
-  firstName: string;
-  lastName: string;
-  athenapatientid: string;
+  patientdetails: {
+    athenapatientid: string;
+    firstname: string;
+    lastname: string;
+    // add other fields as necessary
+  };
 }
 
-export const usePatientSearch = (name: string) => {
+const usePatients = (searchTerm: string) => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
-      setLoading(true);
       try {
-        const data: Patient[] = await searchPatients(name);
+        const data = await searchPatients(searchTerm);
         setPatients(data);
-      } catch (err) {
-        setError(err as Error);
-      } finally {
-        setLoading(false);
+      } catch (err: any) {
+        setError(err);
       }
     };
 
-    if (name) {
-      fetchPatients();
-    }
-  }, [name]);
+    fetchPatients();
+  }, [searchTerm]);
 
-  return { patients, error, loading };
+  return { patients, error };
 };
+
+export default usePatients;

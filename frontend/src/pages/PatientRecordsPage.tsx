@@ -13,8 +13,8 @@ const PatientRecordsPage: React.FC = () => {
     <div>
       <h1>Patient Records</h1>
       <ul>
-        {records.map((record, index) => (
-          <li key={index}>{JSON.stringify(record)}</li>
+        {records.map((record) => (
+          <li key={record._id}>{`${record.patientdetails.firstname} ${record.patientdetails.lastname}`}</li>
         ))}
       </ul>
     </div>

@@ -1,18 +1,33 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-export interface IPatient extends Document {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  medicalHistory: string[];
+interface Name {
+  given: string[];
+  family: string;
 }
 
-const PatientSchema: Schema = new Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  dateOfBirth: { type: Date, required: true },
-  medicalHistory: { type: [String], required: true },
+interface Patients {
+  name: Name;
+}
+
+interface Patient extends Document {
+  patients: Patients[];
+  athenapatientid: string;
+}
+
+const NameSchema: Schema = new Schema({
+  given: { type: [String], required: true },
+  family: { type: String, required: true },
 });
 
-const Patient = mongoose.model<IPatient>('Patient', PatientSchema);
-export default Patient;
+const PatientsSchema: Schema = new Schema({
+  name: { type: NameSchema, required: true },
+});
+
+const PatientSchema: Schema = new Schema({
+  patients: { type: [PatientsSchema], required: true },
+  athenapatientid: { type: String, required: true }
+});
+
+const PatientModel = mongoose.model<Patient>('Patient', PatientSchema, 'patient');
+
+export default PatientModel;

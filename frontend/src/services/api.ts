@@ -1,25 +1,24 @@
 import axios from 'axios';
+import { Patient } from '../types/Patient';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001/api',
-});
+export const searchPatients = async (query: string) => {
+  try {
+    const response = await axios.get(`/api/patients/search`, {
+      params: { query }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching patients:', error);
+    throw error;
+  }
+};
 
-export const getPatients = async () => {
-  const response = await api.get('/patients');
+export const getPatientRecords = async (patientId: string) => {
+  const response = await axios.get(`/api/patients/records/${patientId}`);
   return response.data;
 };
 
-export const getPatient = async (id: string) => {
-  const response = await api.get(`/patients/${id}`);
-  return response.data;
-};
-
-export const searchPatients = async (name: string) => {
-  const response = await api.get(`/patients/search`, { params: { name } });
-  return response.data;
-};
-
-export const getPatientRecords = async (athenapatientid: string) => {
-  const response = await api.get(`/patients/records/${athenapatientid}`);
+export const getPatients = async (): Promise<Patient[]> => {
+  const response = await axios.get('/api/patients');
   return response.data;
 };

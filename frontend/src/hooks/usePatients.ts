@@ -1,23 +1,23 @@
 import { useState, useEffect } from 'react';
-import { getPatients } from '../services/api';
+import { searchPatients } from '../services/api';
 
 interface Patient {
   _id: string;
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
-  medicalHistory: string[];
+  athenapatientid: string;
 }
 
-const usePatients = () => {
+export const usePatientSearch = (name: string) => {
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
+      setLoading(true);
       try {
-        const data = await getPatients();
+        const data: Patient[] = await searchPatients(name);
         setPatients(data);
       } catch (err) {
         setError(err as Error);
@@ -26,10 +26,10 @@ const usePatients = () => {
       }
     };
 
-    fetchPatients();
-  }, []);
+    if (name) {
+      fetchPatients();
+    }
+  }, [name]);
 
-  return { patients, loading, error };
+  return { patients, error, loading };
 };
-
-export default usePatients;

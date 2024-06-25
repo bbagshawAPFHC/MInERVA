@@ -1,18 +1,18 @@
 import React from 'react';
-import usePatients from '../hooks/usePatients';
+import { usePatientSearch } from '../hooks/usePatients'; // Import as named export
 
 const PatientListPage: React.FC = () => {
-  const { patients, loading, error } = usePatients();
+  const { patients, error, loading } = usePatientSearch('');
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div>
-      <h1>Patients</h1>
+      <h1>Patient List</h1>
       <ul>
         {patients.map((patient) => (
-          <li key={patient._id}>{`${patient.firstName} ${patient.lastName}`}</li>
+          <li key={patient._id}>{`${patient.firstName} ${patient.lastName} (ID: ${patient.athenapatientid})`}</li>
         ))}
       </ul>
     </div>

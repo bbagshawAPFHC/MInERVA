@@ -1,27 +1,28 @@
 import { useState } from 'react';
 import { searchPatients } from '../services/api';
-
-type FetchError = Error | null;
+import { Patient } from '../types/Patient';
 
 const usePatientSearch = () => {
-  const [patients, setPatients] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<FetchError>(null);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const search = async (name: string) => {
+  const fetchPatients = async (query: string) => {
     setLoading(true);
-    setError(null);
     try {
-      const data = await searchPatients(name);
+      const data: Patient[] = await searchPatients(query);
+      console.log('Fetched patients:', data); // Debugging output
       setPatients(data);
+      setError(null);
     } catch (err) {
-      setError(err as Error); // Type assertion to ensure err is of type Error
+      console.error('Error in usePatientSearch:', err);
+      setError('Failed to fetch patients');
     } finally {
       setLoading(false);
     }
   };
 
-  return { patients, search, loading, error };
+  return { patients, error, loading, fetchPatients };
 };
 
 export default usePatientSearch;

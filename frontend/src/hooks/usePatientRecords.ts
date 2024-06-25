@@ -3,27 +3,29 @@ import { getPatientRecords } from '../services/api';
 
 type FetchError = Error | null;
 
-const usePatientRecords = (athenapatientid: string) => {
-  const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(true);
+const usePatientRecords = (patientId: string) => {
+  const [records, setRecords] = useState<any[]>([]);
   const [error, setError] = useState<FetchError>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchRecords = async () => {
+      setLoading(true);
       try {
-        const data = await getPatientRecords(athenapatientid);
+        const data = await getPatientRecords(patientId);
         setRecords(data);
+        setError(null);
       } catch (err) {
-        setError(err as Error); // Type assertion to ensure err is of type Error
+        setError(err as Error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchRecords();
-  }, [athenapatientid]);
+  }, [patientId]);
 
-  return { records, loading, error };
+  return { records, error, loading };
 };
 
 export default usePatientRecords;

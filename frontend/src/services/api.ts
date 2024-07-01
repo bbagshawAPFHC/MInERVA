@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:3001/api';
 
 export const searchDemographic = async (athenapatientid: string): Promise<Patient[]> => {
   try {
-    const response = await axios.get<Patient[]>(`${API_URL}/demographic/search`, {
+    const response = await axios.get<Patient[]>(`${API_URL}/patients/search`, {
       params: { athenapatientid }
     });
     return response.data;
@@ -15,7 +15,6 @@ export const searchDemographic = async (athenapatientid: string): Promise<Patien
   }
 };
 
-// Define getPatientRecords
 export const getPatientRecords = async (athenapatientid: string): Promise<Patient[]> => {
   try {
     const response = await axios.get<Patient[]>(`${API_URL}/patients/records`, {
@@ -28,7 +27,6 @@ export const getPatientRecords = async (athenapatientid: string): Promise<Patien
   }
 };
 
-// Define searchPatients
 export const searchPatients = async (searchTerm: string): Promise<Patient[]> => {
   try {
     const response = await axios.get<Patient[]>(`${API_URL}/patients/search`, {
@@ -37,6 +35,18 @@ export const searchPatients = async (searchTerm: string): Promise<Patient[]> => 
     return response.data;
   } catch (error) {
     console.error('Error searching patients', error);
+    throw error;
+  }
+};
+
+export const downloadAllPatientData = async (athenapatientid: string): Promise<Blob> => {
+  try {
+    const response = await axios.get(`${API_URL}/patients/${athenapatientid}/download`, {
+      responseType: 'blob'
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error downloading patient data', error);
     throw error;
   }
 };
